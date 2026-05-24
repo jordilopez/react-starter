@@ -1,10 +1,11 @@
-import { Button } from './Button';
+import { Button } from '../../ui/Button/Button';
 import './header.css';
 
 type User = {
   name: string;
 };
 
+/** Props for the Header layout component. */
 export interface HeaderProps {
   user?: User;
   onLogin?: () => void;
@@ -12,6 +13,7 @@ export interface HeaderProps {
   onCreateAccount?: () => void;
 }
 
+/** Application header with user authentication controls. */
 export const Header = ({ user, onLogin, onLogout, onCreateAccount }: HeaderProps) => (
   <header>
     <div className="storybook-header">
@@ -40,12 +42,18 @@ export const Header = ({ user, onLogin, onLogout, onCreateAccount }: HeaderProps
             <span className="welcome">
               Welcome, <b>{user.name}</b>!
             </span>
-            <Button size="small" onClick={onLogout} label="Log out" />
+            <Button size="sm" onClick={onLogout}>
+              Log out
+            </Button>
           </>
         ) : (
           <>
-            <Button size="small" onClick={onLogin} label="Log in" />
-            <Button primary size="small" onClick={onCreateAccount} label="Sign up" />
+            <Button size="sm" onClick={onLogin}>
+              Log in
+            </Button>
+            <Button variant="secondary" size="sm" onClick={onCreateAccount}>
+              Sign up
+            </Button>
           </>
         )}
       </div>

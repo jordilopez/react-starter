@@ -1,11 +1,12 @@
 import { useState, type FC } from 'react';
-import { Header } from './Header';
+import { Header } from '../Header/Header';
 import './page.css';
 
 type User = {
   name: string;
 };
 
+/** Storybook demo page showing Header + content area composition. */
 export const Page: FC = () => {
   const [user, setUser] = useState<User>();
 
