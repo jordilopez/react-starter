@@ -19,7 +19,7 @@ export function Button({
   return (
     <button
       type="button"
-      className={[styles.cButton, styles[variant], styles[size], className]
+      className={[styles['c-button'], styles[variant], styles[size], className]
         .filter(Boolean)
         .join(' ')}
       {...props}
