@@ -1,1 +1,2 @@
+gitleaks git --staged -v
 npx lint-staged

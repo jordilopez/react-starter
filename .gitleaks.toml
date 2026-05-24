@@ -1,0 +1,12 @@
+# Gitleaks configuration for react-starter
+# Extends the default config with project-specific path exclusions
+
+[allowlist]
+  # Build artifacts and auto-generated files
+  paths = [
+    '''storybook-static''',
+    '''dist''',
+    '''coverage''',
+    '''test-results''',
+    '''node_modules''',
+  ]
