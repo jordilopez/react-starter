@@ -8,18 +8,18 @@ describe('Button', () => {
     expect(screen.getByRole('button', { name: /click me/i })).toBeInTheDocument();
   });
 
-  it('applies default variant and size classes', () => {
+  it('applies default variant and size data attributes', () => {
     render(<Button>Default</Button>);
     const button = screen.getByRole('button');
-    expect(button.className).toContain('primary');
-    expect(button.className).toContain('md');
+    expect(button).toHaveAttribute('data-variant', 'primary');
+    expect(button).toHaveAttribute('data-size', 'md');
   });
 
   it('applies custom variant and size', () => {
     render(<Button variant="secondary" size="lg">Custom</Button>);
     const button = screen.getByRole('button');
-    expect(button.className).toContain('secondary');
-    expect(button.className).toContain('lg');
+    expect(button).toHaveAttribute('data-variant', 'secondary');
+    expect(button).toHaveAttribute('data-size', 'lg');
   });
 
   it('calls onClick when clicked', () => {

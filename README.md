@@ -59,6 +59,7 @@ src/
 ## CSS Conventions
 
 - **Root class prefix:** `c-` for UI components (`.c-button`), `l-` for layout components (`.l-header`)
+- **Variants/states/sizes** use `data-*` attributes (`data-variant="primary"`, `data-size="lg"`) — not modifier classes
 - **Nested CSS** is preferred over flat selectors
 - **CSS Modules** (`*.module.css`) for component-scoped styles
 - **Custom properties** in `:root` adapt to user's light/dark preference

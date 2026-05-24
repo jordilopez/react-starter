@@ -24,23 +24,23 @@
   }
 
   /* Size variants */
-  &.sm {
+  &[data-size='sm'] {
     font-size: 13px;
     padding: 4px 10px;
   }
 
-  &.md {
+  &[data-size='md'] {
     font-size: 15px;
     padding: 8px 16px;
   }
 
-  &.lg {
+  &[data-size='lg'] {
     font-size: 17px;
     padding: 12px 24px;
   }
 
   /* Visual variants */
-  &.primary {
+  &[data-variant='primary'] {
     background: var(--accent);
     color: #fff;
     border-color: var(--accent);
@@ -51,7 +51,7 @@
     }
   }
 
-  &.secondary {
+  &[data-variant='secondary'] {
     background: var(--accent-bg);
     color: var(--accent);
     border-color: var(--accent-border);
@@ -61,7 +61,7 @@
     }
   }
 
-  &.ghost {
+  &[data-variant='ghost'] {
     background: transparent;
     color: var(--text-h);
     border-color: transparent;

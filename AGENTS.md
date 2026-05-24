@@ -63,7 +63,10 @@ components/{namespace}/{ComponentName}/
   - `c-ComponentName` for UI components (`.c-button`, `.c-card`)
   - `l-LayoutName` for layout components (`.l-header`, `.l-page`)
 - **Nested CSS** is preferred — group child selectors inside the root rule
-- Variants/modifiers use `&.variant` nesting inside the root
+- **Variants, states, and sizes** use `data-*` attributes, not modifier classes:
+  - `data-variant="primary"` / `data-size="lg"`
+  - Selected via `&[data-variant='primary']` in nested CSS
+- The root class is the **only class** on the element — everything else is a data attribute
 
 #### Organisation
 
