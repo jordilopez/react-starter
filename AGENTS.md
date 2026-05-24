@@ -55,11 +55,22 @@ components/{namespace}/{ComponentName}/
 - **Files:** `ComponentName.{tsx,module.css,test.tsx,stories.tsx}`
 - **Exports:** Named exports for components, `export interface ComponentNameProps`
 
-### Styling
+### CSS Conventions
+
+#### Naming & Nesting
+
+- **Root class names** follow the prefix convention:
+  - `c-ComponentName` for UI components (`.c-button`, `.c-card`)
+  - `l-LayoutName` for layout components (`.l-header`, `.l-page`)
+- **Nested CSS** is preferred — group child selectors inside the root rule
+- Variants/modifiers use `&.variant` nesting inside the root
+
+#### Organisation
 
 - **Global styles** live in `src/styles/` — `core/` for variables + reset, `basics/` for element defaults
 - **CSS custom properties** adapt to user's light/dark preference
 - **Component styles** use CSS Modules (`*.module.css`) and reference global variables via `var(--...)`
+- **Layout component styles** use plain `.css` (not modules) since they're page-level
 
 ### JSDoc
 

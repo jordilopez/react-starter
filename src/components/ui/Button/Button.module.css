@@ -1,4 +1,4 @@
-.button {
+.c-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -22,52 +22,52 @@
     opacity: 0.5;
     cursor: not-allowed;
   }
-}
 
-/* 尺寸 */
-.sm {
-  font-size: 13px;
-  padding: 4px 10px;
-}
-
-.md {
-  font-size: 15px;
-  padding: 8px 16px;
-}
-
-.lg {
-  font-size: 17px;
-  padding: 12px 24px;
-}
-
-/* 变体 */
-.primary {
-  background: var(--accent);
-  color: #fff;
-  border-color: var(--accent);
-
-  &:hover:not(:disabled) {
-    background: color-mix(in srgb, var(--accent), #000 15%);
-    border-color: color-mix(in srgb, var(--accent), #000 15%);
+  /* Size variants */
+  &.sm {
+    font-size: 13px;
+    padding: 4px 10px;
   }
-}
 
-.secondary {
-  background: var(--accent-bg);
-  color: var(--accent);
-  border-color: var(--accent-border);
-
-  &:hover:not(:disabled) {
-    background: color-mix(in srgb, var(--accent-bg), var(--accent) 10%);
+  &.md {
+    font-size: 15px;
+    padding: 8px 16px;
   }
-}
 
-.ghost {
-  background: transparent;
-  color: var(--text-h);
-  border-color: transparent;
+  &.lg {
+    font-size: 17px;
+    padding: 12px 24px;
+  }
 
-  &:hover:not(:disabled) {
+  /* Visual variants */
+  &.primary {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+
+    &:hover:not(:disabled) {
+      background: color-mix(in srgb, var(--accent), #000 15%);
+      border-color: color-mix(in srgb, var(--accent), #000 15%);
+    }
+  }
+
+  &.secondary {
     background: var(--accent-bg);
+    color: var(--accent);
+    border-color: var(--accent-border);
+
+    &:hover:not(:disabled) {
+      background: color-mix(in srgb, var(--accent-bg), var(--accent) 10%);
+    }
+  }
+
+  &.ghost {
+    background: transparent;
+    color: var(--text-h);
+    border-color: transparent;
+
+    &:hover:not(:disabled) {
+      background: var(--accent-bg);
+    }
   }
 }
