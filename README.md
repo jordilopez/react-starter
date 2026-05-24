@@ -39,9 +39,12 @@ src/
 ├── components/
 │   ├── ui/          ← Reusable UI primitives
 │   └── layout/      ← Layout components
+├── styles/
+│   ├── core/        ← Reset + CSS custom properties (light/dark)
+│   └── basics/      ← Base element styles (typography, layout)
 ├── App.tsx
 ├── main.tsx
-└── index.css
+└── index.css        ← Imports all style modules
 ```
 
 For AI agent context, see [AGENTS.md](./AGENTS.md).

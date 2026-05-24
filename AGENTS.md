@@ -23,11 +23,18 @@ src/
 │   └── layout/        ← Layout components
 │       ├── Header/
 │       └── Page/
+├── styles/
+│   ├── core/
+│   │   ├── reset.css      ← Modern CSS reset
+│   │   └── variables.css  ← Custom properties (light/dark)
+│   └── basics/
+│       ├── layout.css     ← #root container
+│       └── typography.css ← h1, h2, p, code
 ├── App.tsx
 ├── App.module.css
 ├── App.test.tsx
 ├── main.tsx
-└── index.css          ← Global styles + CSS variables
+└── index.css              ← Imports all style modules
 ```
 
 ## Component Conventions
@@ -47,6 +54,12 @@ components/{namespace}/{ComponentName}/
 - **Folders:** `PascalCase/ComponentName/`
 - **Files:** `ComponentName.{tsx,module.css,test.tsx,stories.tsx}`
 - **Exports:** Named exports for components, `export interface ComponentNameProps`
+
+### Styling
+
+- **Global styles** live in `src/styles/` — `core/` for variables + reset, `basics/` for element defaults
+- **CSS custom properties** adapt to user's light/dark preference
+- **Component styles** use CSS Modules (`*.module.css`) and reference global variables via `var(--...)`
 
 ### JSDoc
 
