@@ -37,14 +37,35 @@ npm run dev
 ```
 src/
 ├── components/
-│   ├── ui/          ← Reusable UI primitives
-│   └── layout/      ← Layout components
+│   ├── ui/          ← Reusable UI primitives (c- prefix)
+│   │   └── Button/
+│   └── layout/      ← Layout components (l- prefix)
+│       ├── Header/
+│       └── Page/
 ├── styles/
-│   ├── core/        ← Reset + CSS custom properties (light/dark)
-│   └── basics/      ← Base element styles (typography, layout)
+│   ├── core/
+│   │   ├── reset.css      ← Modern CSS reset
+│   │   └── variables.css  ← Custom properties (light/dark)
+│   └── basics/
+│       ├── layout.css     ← #root container
+│       └── typography.css ← h1, h2, p, code
 ├── App.tsx
+├── App.module.css
+├── App.test.tsx
 ├── main.tsx
-└── index.css        ← Imports all style modules
+└── index.css              ← Imports all style modules
 ```
+
+## CSS Conventions
+
+- **Root class prefix:** `c-` for UI components (`.c-button`), `l-` for layout components (`.l-header`)
+- **Nested CSS** is preferred over flat selectors
+- **CSS Modules** (`*.module.css`) for component-scoped styles
+- **Custom properties** in `:root` adapt to user's light/dark preference
+
+## Storybook
+
+Stories are co-located with each component (`ComponentName.stories.tsx`).
+Run with `npm run storybook`.
 
 For AI agent context, see [AGENTS.md](./AGENTS.md).
