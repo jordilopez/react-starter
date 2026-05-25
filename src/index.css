@@ -1,7 +1,51 @@
-/* Core */
-@import './styles/core/reset.css';
-@import './styles/core/variables.css';
+/* ==========================================================================
+   Global styles — powered by css-starter
+   ========================================================================== */
 
-/* Basics */
-@import './styles/basics/layout.css';
-@import './styles/basics/typography.css';
+/* --- Shared foundation (tokens, reset, base element styles) --- */
+
+@import 'css-starter';
+
+/* --- React brand overrides + legacy aliases --- */
+/* Override css-starter's defaults (Vue green → React indigo).
+   Legacy aliases (--accent, --text-h, --border, etc.) keep App.module.css
+   working without changes. */
+
+:root {
+  /* Brand */
+  --c-primary: #6366f1;
+  --c-primary-hover: #4f46e5;
+  --c-primary-active: #4338ca;
+  --c-primary-subtle: rgba(99, 102, 241, 0.08);
+  --c-focus-ring: rgba(99, 102, 241, 0.35);
+
+  /* Legacy aliases for App.module.css */
+  --accent: var(--c-primary);
+  --accent-bg: var(--c-primary-subtle);
+  --accent-border: rgba(99, 102, 241, 0.5);
+  --text-h: var(--c-text);
+  --border: var(--c-border);
+  --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --social-bg: rgba(244, 243, 236, 0.5);
+  --code-bg: #f4f3ec;
+}
+
+:root[data-theme='dark'] {
+  --c-primary: #818cf8;
+  --c-primary-hover: #6366f1;
+  --c-primary-active: #4f46e5;
+  --c-primary-subtle: rgba(129, 140, 248, 0.15);
+  --c-focus-ring: rgba(129, 140, 248, 0.4);
+
+  /* Legacy aliases — dark mode */
+  --accent: var(--c-primary);
+  --accent-bg: var(--c-primary-subtle);
+  --accent-border: rgba(129, 140, 248, 0.5);
+  --text-h: #f3f4f6;
+  --border: #2e303a;
+  --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4),
+    0 4px 6px -2px rgba(0, 0, 0, 0.25);
+  --social-bg: rgba(47, 48, 58, 0.5);
+  --code-bg: #1f2028;
+}
