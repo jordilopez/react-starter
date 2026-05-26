@@ -1,16 +1,12 @@
 import type { Preview } from "@storybook/react-vite";
-import { withThemeByDataAttribute } from "@storybook/addon-themes";
 import "../src/index.css";
 
 /**
  * Global Storybook preview configuration.
  *
- * `controls.matchers` auto-assigns colour and date controls
- * based on prop names.
- *
- * `withThemeByDataAttribute` adds a `data-theme` attribute to `<html>`,
- * toggling between "light" and "dark". The built-in backgrounds toolbar
- * is disabled in favour of the **Theme** toggle (paintbrush icon).
+ * Dark mode is controlled by the user's OS preference via
+ * `@media (prefers-color-scheme: dark)` in the CSS tokens.
+ * No theme toggle is needed — the browser handles it automatically.
  *
  * `a11y.test` is set to `'todo'` so accessibility violations
  * surface in the test UI without failing CI.
@@ -35,17 +31,6 @@ const preview: Preview = {
       disable: true,
     },
   },
-
-  decorators: [
-    withThemeByDataAttribute({
-      themes: {
-        light: "light",
-        dark: "dark",
-      },
-      defaultTheme: "light",
-      attributeName: "data-theme",
-    }),
-  ],
 };
 
 export default preview;
