@@ -1,0 +1,47 @@
+/* ==========================================================================
+   Storybook docs pages — follow the design system's light/dark tokens
+   ========================================================================== */
+
+/*
+ * Storybook's built-in docs theme hardcodes a LIGHT background on the docs
+ * wrapper (`.sbdocs`), while the design system's styles follow the user's
+ * OS preference via `@media (prefers-color-scheme: dark)`.
+ *
+ * Result: in dark mode the docs page stays white while the story content
+ * renders with dark-mode styles — elements look "dark on light".
+ *
+ * Fix: in dark mode, override the docs wrapper and its typography to use
+ * the design system tokens, which flip automatically with the OS.
+ */
+
+@media (prefers-color-scheme: dark) {
+  body .sbdocs,
+  body .sbdocs-preview {
+    background-color: var(--c-bg);
+  }
+
+  body .sbdocs {
+    color: var(--c-text);
+  }
+
+  body .sbdocs :is(h1, h2, h3, h4, h5, h6, p, li, ul, ol, blockquote, td, th, caption, figcaption) {
+    color: var(--c-text);
+  }
+
+  body .sbdocs :is(h2, h3, h4, h5, h6) {
+    color: var(--c-text-secondary);
+  }
+
+  body .sbdocs a {
+    color: var(--c-primary);
+  }
+
+  body .sbdocs :is(code, pre) {
+    color: var(--c-text);
+    background-color: var(--c-bg-subtle);
+  }
+
+  body .sbdocs table {
+    border-color: var(--c-border);
+  }
+}
