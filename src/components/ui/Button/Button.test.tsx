@@ -8,18 +8,15 @@ describe('Button', () => {
     expect(screen.getByRole('button', { name: /click me/i })).toBeInTheDocument();
   });
 
-  it('applies default variant and size data attributes', () => {
+  it('applies the c-button class', () => {
     render(<Button>Default</Button>);
-    const button = screen.getByRole('button');
-    expect(button).toHaveAttribute('data-variant', 'primary');
-    expect(button).toHaveAttribute('data-size', 'md');
+    expect(screen.getByRole('button')).toHaveClass('c-button');
   });
 
-  it('applies custom variant and size', () => {
-    render(<Button variant="secondary" size="lg">Custom</Button>);
+  it('merges an external className', () => {
+    render(<Button className="extra">Custom</Button>);
     const button = screen.getByRole('button');
-    expect(button).toHaveAttribute('data-variant', 'secondary');
-    expect(button).toHaveAttribute('data-size', 'lg');
+    expect(button).toHaveClass('c-button', 'extra');
   });
 
   it('calls onClick when clicked', () => {
@@ -36,7 +33,11 @@ describe('Button', () => {
 
   it('does not call onClick when disabled', () => {
     const handleClick = vi.fn();
-    render(<Button disabled onClick={handleClick}>Disabled</Button>);
+    render(
+      <Button disabled onClick={handleClick}>
+        Disabled
+      </Button>,
+    );
     fireEvent.click(screen.getByRole('button'));
     expect(handleClick).not.toHaveBeenCalled();
   });

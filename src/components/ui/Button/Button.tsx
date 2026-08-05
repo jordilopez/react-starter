@@ -1,27 +1,20 @@
 import type { ButtonHTMLAttributes } from 'react';
-import styles from './Button.module.css';
 
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  /** Visual variant of the button. */
-  variant?: 'primary' | 'secondary' | 'ghost';
-  /** Button size. */
-  size?: 'sm' | 'md' | 'lg';
-}
+export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement>;
 
-/** Reusable button component with support for multiple variants and sizes. */
-export function Button({
-  variant = 'primary',
-  size = 'md',
-  className,
-  children,
-  ...props
-}: ButtonProps) {
+/**
+ * Headless button component.
+ *
+ * No local styles. The visual comes from `css-starter`'s native button
+ * styles (neutral variant); `.c-button` is applied as a class hook.
+ * All native button attributes (onClick, disabled, aria-*, etc.) are
+ * forwarded as-is.
+ */
+export function Button({ className, children, ...props }: ButtonProps) {
   return (
     <button
       type="button"
-      className={[styles['c-button'], className].filter(Boolean).join(' ')}
-      data-variant={variant}
-      data-size={size}
+      className={['c-button', className].filter(Boolean).join(' ')}
       {...props}
     >
       {children}
