@@ -10,31 +10,25 @@ React sandbox for experimenting with components, patterns, and tooling. Built wi
 - **Build:** Vite 8
 - **Testing:** Vitest (unit), Playwright (E2E), Storybook (visual)
 - **Linting:** ESLint 10 + typescript-eslint
-- **Styling:** CSS Modules (`.module.css`)
+- **Styling:** [css-starter](../css-starter) design system (tokens + native element styles); CSS Modules only for app-level styles (`App.module.css`)
 - **Git Hooks:** Husky + lint-staged
 
 ## Project Structure
 
 ```
 src/
-├── components/
-│   ├── ui/            ← Reusable UI primitives
-│   │   └── Button/
-│   └── layout/        ← Layout components
-│       ├── Header/
-│       └── Page/
-├── styles/
-│   ├── core/
-│   │   ├── reset.css      ← Modern CSS reset
-│   │   └── variables.css  ← Custom properties (light/dark)
-│   └── basics/
-│       ├── layout.css     ← #root container
-│       └── typography.css ← h1, h2, p, code
+├── index.css              ← Imports css-starter (tokens, reset, base element styles)
+├── main.tsx
 ├── App.tsx
 ├── App.module.css
 ├── App.test.tsx
-├── main.tsx
-└── index.css              ← Imports all style modules
+├── setupTests.ts
+└── components/
+    ├── ui/                ← Headless UI primitives (c- prefix class)
+    │   └── Button/
+    └── layout/            ← Layout components (l- prefix class)
+        ├── Header/
+        └── Page/
 ```
 
 ## Component Conventions
@@ -43,37 +37,27 @@ Every component lives in its own folder under a namespace category:
 
 ```
 components/{namespace}/{ComponentName}/
-├── ComponentName.tsx
-├── ComponentName.module.css   ← CSS Modules for scoped styles
-├── ComponentName.test.tsx      ← Vitest unit tests
-└── ComponentName.stories.tsx   ← Storybook stories
+├── ComponentName.tsx        ← Component logic (no local CSS)
+├── ComponentName.test.tsx   ← Vitest unit tests
+└── ComponentName.stories.tsx ← Storybook stories
 ```
 
 ### Naming
 
 - **Folders:** `PascalCase/ComponentName/`
-- **Files:** `ComponentName.{tsx,module.css,test.tsx,stories.tsx}`
-- **Exports:** Named exports for components, `export interface ComponentNameProps`
+- **Files:** `ComponentName.{tsx,test.tsx,stories.tsx}`
+- **Exports:** Named exports for components, `export type ComponentNameProps`
 
-### CSS Conventions
+### Headless styling
 
-#### Naming & Nesting
-
-- **Root class names** follow the prefix convention:
-  - `c-ComponentName` for UI components (`.c-button`, `.c-card`)
-  - `l-LayoutName` for layout components (`.l-header`, `.l-page`)
-- **Nested CSS** is preferred — group child selectors inside the root rule
-- **Variants, states, and sizes** use `data-*` attributes, not modifier classes:
-  - `data-variant="primary"` / `data-size="lg"`
-  - Selected via `&[data-variant='primary']` in nested CSS
-- The root class is the **only class** on the element — everything else is a data attribute
-
-#### Organisation
-
-- **Global styles** live in `src/styles/` — `core/` for variables + reset, `basics/` for element defaults
-- **CSS custom properties** adapt to user's light/dark preference
-- **Component styles** use CSS Modules (`*.module.css`) and reference global variables via `var(--...)`
-- **Layout component styles** use plain `.css` (not modules) since they're page-level
+- **Components carry no local CSS** — the visual comes from css-starter's
+  native element styles (e.g. `:where(button)`) and tokens
+- UI components apply a `c-` class as a hook (`.c-button`), layout
+  components an `l-` class (`.l-header`, `.l-page`)
+- Extra classes merge via the `className` prop; all native attributes are
+  forwarded
+- Use native semantics (`<button disabled>`, `aria-*`) instead of custom
+  `data-*` state attributes
 
 ### JSDoc
 
@@ -84,11 +68,12 @@ In `.ts`/`.tsx` files: brief description line only (no `@param`/`@returns` — t
 - Stories are co-located with components (`ComponentName.stories.tsx`)
 - Run: `npm run storybook`
 - Addons: a11y, docs, vitest, MCP
+- Docs pages follow the design system's light/dark tokens (see `.storybook/docs.css`)
 
 ## Testing
 
 - **Unit:** `npm test` — Vitest, co-located `*.test.tsx`
-- **E2E:** `npm run test:e2e` — Playwright in `e2e/`
+- **E2E:** `npm run test:e2e` — Playwright in `e2e/` (app + Button stories via Storybook)
 - **Storybook tests:** Via `@storybook/addon-vitest`
 
 ## Commands

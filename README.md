@@ -29,40 +29,38 @@ npm run dev
 - [Vitest](https://vitest.dev/) — unit testing
 - [Playwright](https://playwright.dev/) — E2E testing
 - [Storybook](https://storybook.js.org/) — component development
-- [CSS Modules](https://github.com/css-modules/css-modules) — scoped styling
+- [css-starter](https://github.com/jordilopez/css-starter) — shared design system (tokens, reset, native element styles)
+- [CSS Modules](https://github.com/css-modules/css-modules) — app-level scoped styling (`App.module.css`)
 - [Husky](https://typicode.github.io/husky/) + [lint-staged](https://github.com/okonet/lint-staged) — pre-commit linting
 
 ## Project Structure
 
 ```
 src/
-├── components/
-│   ├── ui/          ← Reusable UI primitives (c- prefix)
-│   │   └── Button/
-│   └── layout/      ← Layout components (l- prefix)
-│       ├── Header/
-│       └── Page/
-├── styles/
-│   ├── core/
-│   │   ├── reset.css      ← Modern CSS reset
-│   │   └── variables.css  ← Custom properties (light/dark)
-│   └── basics/
-│       ├── layout.css     ← #root container
-│       └── typography.css ← h1, h2, p, code
+├── index.css              ← Imports css-starter (tokens, reset, base element styles)
+├── main.tsx
 ├── App.tsx
 ├── App.module.css
 ├── App.test.tsx
-├── main.tsx
-└── index.css              ← Imports all style modules
+├── setupTests.ts
+└── components/
+    ├── ui/                ← Headless UI primitives (c- prefix class)
+    │   └── Button/
+    └── layout/            ← Layout components (l- prefix class)
+        ├── Header/
+        └── Page/
 ```
 
 ## CSS Conventions
 
-- **Root class prefix:** `c-` for UI components (`.c-button`), `l-` for layout components (`.l-header`)
-- **Variants/states/sizes** use `data-*` attributes (`data-variant="primary"`, `data-size="lg"`) — not modifier classes
-- **Nested CSS** is preferred over flat selectors
-- **CSS Modules** (`*.module.css`) for component-scoped styles
-- **Custom properties** in `:root` adapt to user's light/dark preference
+- **Components are headless** — no local component styles; the visual comes
+  from css-starter's native element styles (e.g. `:where(button)`) and tokens
+- **Class hooks** — UI components apply a `c-` class (`.c-button`), layout
+  components a `l-` class (`.l-header`, `.l-page`); extra classes merge via
+  the `className` prop
+- **App-level styles** use CSS Modules (`App.module.css`) with native nesting
+- **Tokens** from css-starter (`--c-*`, `--sp-*`, …) adapt to the user's
+  light/dark preference automatically
 
 ## Storybook
 
