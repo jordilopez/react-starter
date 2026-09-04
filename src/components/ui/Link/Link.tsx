@@ -1,5 +1,9 @@
 import type { AnchorHTMLAttributes, MouseEvent as ReactMouseEvent } from 'react';
 
+/**
+ * Props for the headless `Link` — native anchor attributes plus the
+ * `disabled` and `openInNewTab` behavior flags.
+ */
 export type LinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
   /** Destination URL. Required. */
   href: string;

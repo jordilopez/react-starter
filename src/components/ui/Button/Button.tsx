@@ -1,5 +1,6 @@
 import type { ButtonHTMLAttributes } from 'react';
 
+/** Props for the headless `Button` — all native button attributes pass through. */
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement>;
 
 /**
