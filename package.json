@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@storybook/addon-themes": "^10.4.1",
-    "css-starter": "github:jordilopez/css-starter#cb17ba5",
+    "css-starter": "github:jordilopez/css-starter#v0.2.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6"
   },
