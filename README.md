@@ -83,6 +83,7 @@ npm run dev
 - [Vitest](https://vitest.dev/) — unit testing
 - [Playwright](https://playwright.dev/) — E2E testing
 - [Storybook](https://storybook.js.org/) — component development
+- [lucide-react](https://lucide.dev/guide/packages/lucide-react) — icon library (named imports for tree-shaking)
 - [css-starter](https://github.com/jordilopez/css-starter) — shared design system (tokens, reset, native element styles)
 - [CSS Modules](https://github.com/css-modules/css-modules) — app-level scoped styling (`App.module.css`)
 - [Husky](https://typicode.github.io/husky/) + [lint-staged](https://github.com/okonet/lint-staged) — pre-commit linting
@@ -100,7 +101,9 @@ src/
 └── components/
     ├── ui/                ← Headless UI primitives (c- prefix class)
     │   ├── Button/
-    │   └── Link/
+    │   ├── Icon/
+    │   ├── Link/
+    │   └── Toast/
     └── layout/            ← Layout components (l- prefix class)
         ├── Header/
         └── Page/
@@ -119,6 +122,32 @@ Global styles import css-starter and rebrand via token overrides (see
 - **App-level styles** use CSS Modules (`App.module.css`) with native nesting
 - **Tokens** from css-starter (`--c-*`, `--sp-*`, …) adapt to the user's
   light/dark preference automatically
+
+## Icons
+
+Icons come from [`lucide-react`](https://lucide.dev/guide/packages/lucide-react)
+via the headless `Icon` primitive (`src/components/ui/Icon`). Always use
+**named Lucide imports** (`import { X } from 'lucide-react'`) so unused icons
+tree-shake out of the bundle.
+
+- **Prefer `Icon`** — render Lucide icons through `<Icon icon={X} />` instead
+  of hand-authored `<svg>` markup; pass any Lucide/SVG props straight through
+- **Default sizing is `1em`** — icons scale with the surrounding font size;
+  no hard-coded pixel dimensions
+- **Default color is `currentColor`** — the icon inherits the parent's text
+  color; apply a `--c-*` token (e.g. `color: var(--c-primary)`) on the parent
+  wrapper to re-theme, and never hard-code a color inside the icon itself
+- **Decorative by default** — an icon without a label renders
+  `aria-hidden="true"` and is hidden from the accessibility tree
+- **Label informative icons** — for a standalone icon that conveys meaning,
+  pass `aria-label` (exposed as `role="img"`)
+- **Icon-only controls label the control** — on icon-only buttons/links, put
+  the accessible name on the button/link itself (e.g. `aria-label="Close"`);
+  the nested icon stays decorative
+- **No icon-specific CSS** — the `.c-icon` class is only a styling hook;
+  sizing and color come from inherited typography, not component styles
+- **Legacy artwork is fine** — existing brand artwork and hand-authored SVGs
+  (e.g. the Header logo) don't need to migrate to Lucide
 
 ## Storybook
 
