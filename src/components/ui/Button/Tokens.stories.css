@@ -1,0 +1,30 @@
+/* ==========================================================================
+   Storybook demo: consumer token overrides for `css-starter`
+   ==========================================================================
+
+   This file is intentionally **unlayered** (no `@layer`): `css-starter`
+   ships all of its styles inside `css-starter.*` cascade layers, and
+   unlayered declarations always beat layered ones in the cascade — no
+   `!important` needed.
+
+   The rules are scoped to the `.token-override` wrapper (not `:root`),
+   so the purple palette applies only inside the ConsumerOverride story;
+   the global React indigo brand on `:root` stays unchanged. Custom
+   properties inherit, so every token-driven style inside the wrapper
+   picks these up.
+   ========================================================================== */
+
+.token-override {
+  --c-primary: #8b5cf6;
+  --c-primary-hover: #7c3aed;
+  --c-primary-active: #6d28d9;
+  --c-primary-subtle: #ede9fe;
+  --c-focus-ring: #a78bfa;
+}
+
+/* Shared row layout so both stories render comparable swatch rows. */
+.token-swatch-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+}
