@@ -17,9 +17,11 @@ export type LinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
  * anchor attributes (target, aria-*, etc.) are forwarded as-is.
  *
  * `openInNewTab` sets `target="_blank"` and merges
- * `rel="noopener noreferrer"` (also automatic when `target="_blank"`).
+ * `rel="noopener noreferrer"` (also automatic when `target="_blank"`,
+ * matched case-insensitively so `target="_BLANK"` is protected too).
  * Disabled links drop the `href` attribute, announce
- * `aria-disabled="true"`, and swallow clicks.
+ * `aria-disabled="true"`, and swallow clicks (preventDefault +
+ * stopPropagation).
  */
 export function Link({
   href,
@@ -32,7 +34,7 @@ export function Link({
   onClick,
   ...rest
 }: LinkProps) {
-  const isNewTab = openInNewTab || target === '_blank';
+  const isNewTab = openInNewTab || target?.toLowerCase() === '_blank';
   const effectiveTarget = openInNewTab ? '_blank' : target;
   const effectiveRel = isNewTab
     ? ['noopener', 'noreferrer', rel].filter(Boolean).join(' ')
@@ -40,7 +42,10 @@ export function Link({
 
   function handleClick(event: ReactMouseEvent<HTMLAnchorElement>) {
     if (disabled) {
+      // Suppress activation AND propagation so disabled links never
+      // bubble click events to ancestor handlers.
       event.preventDefault();
+      event.stopPropagation();
       return;
     }
     onClick?.(event);

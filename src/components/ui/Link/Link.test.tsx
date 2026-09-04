@@ -94,4 +94,38 @@ describe('Link', () => {
     link.dispatchEvent(event);
     expect(event.defaultPrevented).toBe(true);
   });
+
+  it('does not propagate clicks to ancestors when disabled', () => {
+    const handleWrapperClick = vi.fn();
+    const { container } = render(
+      <div onClick={handleWrapperClick}>
+        <Link href="/docs" disabled>
+          Disabled
+        </Link>
+      </div>,
+    );
+    fireEvent.click(container.querySelector('a') as HTMLAnchorElement);
+    expect(handleWrapperClick).not.toHaveBeenCalled();
+  });
+
+  it('still propagates clicks to ancestors when enabled', () => {
+    const handleWrapperClick = vi.fn();
+    render(
+      <div onClick={handleWrapperClick}>
+        <Link href="/docs">Enabled</Link>
+      </div>,
+    );
+    fireEvent.click(screen.getByRole('link'));
+    expect(handleWrapperClick).toHaveBeenCalledTimes(1);
+  });
+
+  it('treats target="_BLANK" like target="_blank" for rel protection', () => {
+    render(
+      <Link href="https://example.com" target="_BLANK">
+        New tab
+      </Link>,
+    );
+    const link = screen.getByRole('link');
+    expect(link).toHaveAttribute('rel', 'noopener noreferrer');
+  });
 });
