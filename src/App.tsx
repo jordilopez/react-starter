@@ -3,6 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
 import styles from './App.module.css'
+import { Link } from './components/ui/Link/Link'
 
 /** Main application component. Renders the Vite + React starter page with a counter, docs links, and social connections. */
 function App() {
@@ -29,6 +30,7 @@ function App() {
         >
           Count is {count}
         </button>
+        <Link href="/docs">Read the docs</Link>
       </section>
 
       <div className={styles.ticks}></div>

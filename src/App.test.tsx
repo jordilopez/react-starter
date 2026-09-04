@@ -32,4 +32,12 @@ describe('App', () => {
     fireEvent.click(button);
     expect(screen.getByRole('button', { name: /count is 1/i })).toBeInTheDocument();
   });
+
+  it('renders the demo link', () => {
+    render(<App />);
+    expect(screen.getByRole('link', { name: /read the docs/i })).toHaveAttribute(
+      'href',
+      '/docs',
+    );
+  });
 });

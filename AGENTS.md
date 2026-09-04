@@ -25,7 +25,8 @@ src/
 ├── setupTests.ts
 └── components/
     ├── ui/                ← Headless UI primitives (c- prefix class)
-    │   └── Button/
+    │   ├── Button/
+    │   └── Link/
     └── layout/            ← Layout components (l- prefix class)
         ├── Header/
         └── Page/
@@ -51,7 +52,7 @@ components/{namespace}/{ComponentName}/
 ### Headless styling
 
 - **Components carry no local CSS** — the visual comes from css-starter's
-  native element styles (e.g. `:where(button)`) and tokens
+  native element styles (e.g. `:where(button)`) and tokens.
 - UI components apply a `c-` class as a hook (`.c-button`), layout
   components an `l-` class (`.l-header`, `.l-page`)
 - Extra classes merge via the `className` prop; all native attributes are
