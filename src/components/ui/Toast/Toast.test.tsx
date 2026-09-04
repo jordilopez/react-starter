@@ -165,4 +165,26 @@ describe('Toast', () => {
     fireEvent.click(screen.getByRole('button', { name: /close toast/i }));
     expect(handleUserClose).toHaveBeenCalledTimes(1);
   });
+
+  it('defaults to the info variant with its icon', () => {
+    const { container } = render(<Toast>Heads up</Toast>);
+    expect(container.querySelector('dialog')).toHaveAttribute(
+      'data-variant',
+      'info',
+    );
+    expect(container.querySelector('.lucide-info')).toBeInTheDocument();
+  });
+
+  it.each([
+    ['success', '.lucide-circle-check'],
+    ['error', '.lucide-circle-x'],
+    ['warning', '.lucide-triangle-alert'],
+  ] as const)('renders the %s variant icon', (variant, iconClass) => {
+    const { container } = render(<Toast variant={variant}>Look</Toast>);
+    expect(container.querySelector('dialog')).toHaveAttribute(
+      'data-variant',
+      variant,
+    );
+    expect(container.querySelector(iconClass)).toBeInTheDocument();
+  });
 });

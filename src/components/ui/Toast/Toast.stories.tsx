@@ -18,6 +18,33 @@ export const Default: Story = {
   },
 };
 
+export const Success: Story = {
+  args: {
+    role: 'status',
+    variant: 'success',
+    children: 'Changes saved',
+    autoCloseSeconds: 0,
+  },
+};
+
+export const Error: Story = {
+  args: {
+    role: 'alert',
+    variant: 'error',
+    children: 'Something went wrong',
+    autoCloseSeconds: 0,
+  },
+};
+
+export const Warning: Story = {
+  args: {
+    role: 'status',
+    variant: 'warning',
+    children: 'Storage almost full',
+    autoCloseSeconds: 0,
+  },
+};
+
 export const AutoClose: Story = {
   args: {
     role: 'status',

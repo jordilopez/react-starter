@@ -10,6 +10,26 @@
    class stays on the <dialog> as the design-system hook. */
 
 .toast {
+  /* Accent used by the variant icon; falls back to secondary text
+     colour when no variant is set. */
+  --toast-accent: var(--c-text-secondary);
+
+  &[data-variant='info'] {
+    --toast-accent: var(--c-info);
+  }
+
+  &[data-variant='success'] {
+    --toast-accent: var(--c-success);
+  }
+
+  &[data-variant='error'] {
+    --toast-accent: var(--c-error);
+  }
+
+  &[data-variant='warning'] {
+    --toast-accent: var(--c-warning);
+  }
+
   /* Anchor bottom-right; `showModal()` promotes to the top layer, so
      fixed positioning escapes the centered dialog default. `inset: auto`
      clears the UA stylesheet's top/left: 0, which would otherwise pin
@@ -44,6 +64,18 @@
     align-items: center;
     justify-content: space-between;
     gap: var(--sp-3);
+  }
+
+  .content {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    min-width: 0;
+
+    & > svg {
+      flex-shrink: 0;
+      color: var(--toast-accent);
+    }
   }
 
   /* Dim the page without blocking it visually — keep toasts readable
