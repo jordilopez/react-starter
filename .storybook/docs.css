@@ -10,8 +10,9 @@
  * Result: in dark mode the docs page stays white while the story content
  * renders with dark-mode styles — elements look "dark on light".
  *
- * Fix: in dark mode, override the docs wrapper and its typography to use
- * the design system tokens, which flip automatically with the OS.
+ * Fix: in dark mode, override the docs wrapper, its typography, and its
+ * markdown tables to use the design system tokens, which flip automatically
+ * with the OS.
  */
 
 @media (prefers-color-scheme: dark) {
@@ -36,12 +37,29 @@
     color: var(--c-primary);
   }
 
+  /* Use a different surface for inline code / code blocks than the table
+     stripe below, so chips stay visible on striped rows. */
   body .sbdocs :is(code, pre) {
     color: var(--c-text);
-    background-color: var(--c-bg-subtle);
+    background-color: var(--c-bg-muted);
   }
 
-  body .sbdocs table {
-    border-color: var(--c-border);
+  /*
+   * Storybook's markdown docs hardcode the light-theme table stripe,
+   * cell surfaces, text, and borders via runtime-hashed classes. These
+   * selectors outrank its generated rules so the design-system tokens win.
+   */
+  body .sbdocs table :is(td, th) {
+    color: var(--c-text) !important;
+    background-color: var(--c-bg) !important;
+    border-color: var(--c-border) !important;
+  }
+
+  body .sbdocs table :is(td, th) :is(span, div) {
+    color: var(--c-text) !important;
+  }
+
+  body .sbdocs table tr:nth-of-type(2n) :is(td, th) {
+    background-color: var(--c-bg-subtle) !important;
   }
 }
