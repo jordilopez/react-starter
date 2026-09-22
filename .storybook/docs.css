@@ -45,21 +45,19 @@
   }
 
   /*
-   * Storybook's markdown docs hardcode the light-theme table stripe,
-   * cell surfaces, text, and borders via runtime-hashed classes. These
-   * selectors outrank its generated rules so the design-system tokens win.
+   * Storybook's markdown docs hardcode the light-theme table stripe
+   * (rgb(246,249,252)), cell text (rgb(46,51,56)), and cell border
+   * (bluish rgba) via runtime-hashed classes. These selectors outrank its
+   * `.css-xxxx :where(table) …` rules so the design-system tokens win.
+   * Scoped to markdown tables only — Storybook's own ArgsTable
+   * (`.sb-argstableBlock`) keeps its built-in theming.
    */
-  body .sbdocs table :is(td, th) {
-    color: var(--c-text) !important;
-    background-color: var(--c-bg) !important;
-    border-color: var(--c-border) !important;
+  body .sbdocs table:not(.sb-argstableBlock, .sb-argstableBlock *) :is(td, th) {
+    color: var(--c-text);
+    border-color: var(--c-border);
   }
 
-  body .sbdocs table :is(td, th) :is(span, div) {
-    color: var(--c-text) !important;
-  }
-
-  body .sbdocs table tr:nth-of-type(2n) :is(td, th) {
-    background-color: var(--c-bg-subtle) !important;
+  body .sbdocs table:not(.sb-argstableBlock) tr:nth-of-type(2n) {
+    background-color: var(--c-bg-subtle);
   }
 }
