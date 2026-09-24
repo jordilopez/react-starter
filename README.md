@@ -151,6 +151,9 @@ tree-shake out of the bundle.
 
 ## Storybook
 
+The deployed Storybook is available at
+[https://jordilopez.github.io/react-starter/](https://jordilopez.github.io/react-starter/).
+
 Stories are co-located with each component (`ComponentName.stories.tsx`).
 Run with `npm run storybook`.
 
